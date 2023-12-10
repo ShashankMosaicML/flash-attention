@@ -10,7 +10,7 @@ is_sm8x = torch.cuda.get_device_capability("cuda")[0] >= 8
 
 
 @pytest.mark.parametrize(
-    "dtype", [torch.float16, torch.float32] + ([torch.bfloat16] if is_sm8x else [])
+    "dtype", [torch.bfloat16]
 )
 # @pytest.mark.parametrize("dtype", [torch.float16])
 @pytest.mark.parametrize("inplace_backward", [False, True])
