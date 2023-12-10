@@ -19,7 +19,7 @@ is_sm8x = torch.cuda.get_device_capability("cuda")[0] >= 8
 # @pytest.mark.parametrize("lse_square_scale", [1e-2])
 @pytest.mark.parametrize("smoothing", [0.0, 0.9])
 # @pytest.mark.parametrize("smoothing", [0.0])
-@pytest.mark.parametrize("vocab_size", [50257, 128 * 1024])  # test vocab larger than 64k for split
+@pytest.mark.parametrize("vocab_size", [100000, 128 * 1024])  # test vocab larger than 64k for split
 # @pytest.mark.parametrize("vocab_size", [12])
 def test_cross_entropy_loss(vocab_size, smoothing, lse_square_scale, inplace_backward, dtype):
     device = "cuda"
@@ -27,7 +27,7 @@ def test_cross_entropy_loss(vocab_size, smoothing, lse_square_scale, inplace_bac
     # set seed
     torch.random.manual_seed(0)
     batch_size = 8
-    seqlen = 128
+    seqlen = 4096
     x_pt = torch.randn(
         batch_size * seqlen, vocab_size, device=device, dtype=dtype, requires_grad=True
     )
